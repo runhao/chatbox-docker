@@ -10,7 +10,7 @@
         "build:main": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.main.prod.ts",
         "build:renderer": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.renderer.prod.ts",
         "postinstall": "ts-node .erb/scripts/check-native-dep.js && electron-builder install-app-deps && cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.renderer.dev.dll.ts",
-        "package": "ts-node ./.erb/scripts/clean.js dist && npm run build && electron-builder build --publish never",
+        "package": "ts-node ./.erb/scripts/clean.js dist && npm run build && electron-builder build --linux AppImage --arm64 --publish never",
         "package:all": "ts-node ./.erb/scripts/clean.js dist && npm run build && electron-builder build --publish never --win --mac --linux",
         "release": "ts-node ./.erb/scripts/clean.js dist && npm run build && electron-builder build --publish always --win --mac --linux",
         "rebuild": "electron-rebuild --parallel --types prod,dev,optional --module-dir release/app",
@@ -254,14 +254,12 @@
                 {
                     "target": "AppImage",
                     "arch": [
-                        "x64",
                         "arm64"
                     ]
                 },
                 {
                     "target": "deb",
                     "arch": [
-                        "x64",
                         "arm64"
                     ]
                 }
